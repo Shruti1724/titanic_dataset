@@ -1,25 +1,31 @@
-# titanic_dataset
-import pandas as pd
-import numpy as np
-df = pd.read_csv('/content/Titanic-Dataset.csv')
-df.head()
+#  Task 1 - Data Cleaning & Preprocessing
+# Titanic Dataset
 
-df.isnull().sum()
-df['Age'] = df['Age'].fillna(df['Age'].median())
-df['Embarked'] = df['Embarked'].fillna(df['Embarked'].mode()[0])
-df.isnull().sum()
+Clean and preprocess the Titanic dataset to prepare it for machine learning. This includes:
 
-df['Sex'] = df['Sex'].map({'male': 0, 'female': 1})
-df = pd.get_dummies(df, columns=['Embarked'], drop_first=True)
-df = df.drop(columns=['Name', 'Ticket'])
+- Handling missing values
+- Encoding categorical variables
+- Normalizing numerical features
+- Removing outliers
 
-from sklearn.preprocessing import StandardScaler
-cols_to_scale = ['Age', 'Fare', 'Parch', 'SibSp', 'Pclass']
-scaler = StandardScaler()
-df[cols_to_scale] = scaler.fit_transform(df[cols_to_scale])
-df[cols_to_scale].describe()
+## Tools Used
+- Python
+- Pandas
+- NumPy
+- Matplotlib / Seaborn
+- Scikit-learn
 
-import seaborn as sns
-import matplotlib.pyplot as plt
-sns.boxplot(data=df[['Age', 'Fare']])
-plt.show()
+#  Steps Performed
+1. **Loaded the dataset** using Pandas.
+2. **Explored basic statistics** and checked for missing values.
+3. **Imputed missing values** using:
+   - Median for `Age`
+   - Mode for `Embarked`
+4. **Dropped irrelevant columns** like `Cabin`, `Name`, and `Ticket`.
+5. **Encoded categorical columns**:
+   - `Sex` mapped to 0 (male) and 1 (female)
+   - One-hot encoding applied to `Embarked`
+6. **Standardized** numerical features using `StandardScaler`.
+7. **Visualized outliers** using boxplots for `Age` and `Fare`.
+
+
